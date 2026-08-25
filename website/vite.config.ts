@@ -18,7 +18,7 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: 'dist',
+    outDir: path.resolve(root, '../dist'),
     emptyOutDir: true,
   },
 })
