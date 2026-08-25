@@ -4,3 +4,4 @@ dist
 *.local
 .vite
 *.zip
+!website/public/mobile-resp.zip
