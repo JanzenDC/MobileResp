@@ -7,7 +7,6 @@ import { defineConfig } from 'vite'
 const root = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  root: path.resolve(root, 'website'),
   publicDir: path.resolve(root, 'website/public'),
   plugins: [react(), tailwindcss()],
   server: {
@@ -19,7 +18,7 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: path.resolve(root, 'dist'),
+    outDir: 'dist',
     emptyOutDir: true,
   },
 })
