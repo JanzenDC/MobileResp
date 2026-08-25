@@ -19,10 +19,11 @@ function toHttpUrl(raw: string): string | null {
   }
 }
 
-export function LivePreview() {
+export function LivePreview({ layout = 'embed' }: { layout?: 'embed' | 'page' }) {
   const [draft, setDraft] = useState('example.com')
   const [url, setUrl] = useState(DEFAULT_URL)
   const [error, setError] = useState<string | null>(null)
+  const page = layout === 'page'
 
   const runPreview = () => {
     const next = toHttpUrl(draft)
@@ -35,9 +36,12 @@ export function LivePreview() {
   }
 
   return (
-    <section id="preview" className="border-t border-white/10">
+    <section
+      id="preview"
+      className={page ? 'flex min-h-0 flex-1 flex-col' : 'border-t border-white/10'}
+    >
       <form
-        className="flex flex-col gap-3 border-b border-white/10 px-5 py-6 lg:flex-row lg:items-end lg:px-10"
+        className={`flex flex-col gap-3 border-b border-white/10 px-5 lg:flex-row lg:items-end lg:px-10 ${page ? 'py-5' : 'py-6'}`}
         onSubmit={(event) => {
           event.preventDefault()
           runPreview()
@@ -63,10 +67,16 @@ export function LivePreview() {
         </button>
       </form>
       {error && <p className="px-5 pt-3 text-sm text-copper lg:px-10">{error}</p>}
-      <p className="px-5 pt-4 text-sm text-white/50 lg:px-10">
+      <p className={`px-5 text-sm text-white/50 lg:px-10 ${page ? 'py-3' : 'pt-4'}`}>
         Drag the frame headers. Some sites block iframes here. The extension can still open those.
       </p>
-      <div className="relative mt-4 h-[640px] overflow-hidden bg-[#141414] md:h-[720px]">
+      <div
+        className={
+          page
+            ? 'relative min-h-0 flex-1 overflow-hidden bg-[#141414]'
+            : 'relative mt-4 h-[640px] overflow-hidden bg-[#141414] md:h-[720px]'
+        }
+      >
         <iframe
           title="Preview page"
           src={url}

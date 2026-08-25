@@ -1,7 +1,7 @@
 import { ArrowRight, Browser, DeviceMobile, DownloadSimple } from '@phosphor-icons/react'
 import { motion, useReducedMotion } from 'motion/react'
-import type { ReactNode } from 'react'
-import { LivePreview } from './LivePreview'
+import { useEffect, type ReactNode } from 'react'
+import { SiteHeader } from './SiteHeader'
 import featureIframe from './assets/feature-iframe.png'
 import heroViewports from './assets/hero-viewports.png'
 import installDesk from './assets/install-desk.png'
@@ -11,34 +11,13 @@ const zipHref = '/mobile-resp.zip'
 export function App() {
   const reduce = useReducedMotion()
 
+  useEffect(() => {
+    document.title = 'MobileResp'
+  }, [])
+
   return (
     <div className="bg-ink text-mist font-sans">
-      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-white/10 bg-ink/90 px-5 backdrop-blur-md lg:px-10">
-        <a href="#" className="text-[15px] font-semibold tracking-tight text-white no-underline">
-          MobileResp
-        </a>
-        <nav className="flex items-center gap-6 text-sm text-white/70">
-          <a href="#preview" className="hidden no-underline hover:text-white md:inline">
-            Preview
-          </a>
-          <a href="#product" className="hidden no-underline hover:text-white md:inline">
-            Product
-          </a>
-          <a href="#install" className="hidden no-underline hover:text-white md:inline">
-            Install
-          </a>
-          <a href="#faq" className="hidden no-underline hover:text-white md:inline">
-            FAQ
-          </a>
-          <a
-            href={zipHref}
-            download="mobile-resp.zip"
-            className="bg-copper px-4 py-2 text-white no-underline hover:bg-copper-press active:scale-[0.98]"
-          >
-            Download
-          </a>
-        </nav>
-      </header>
+      <SiteHeader current="home" />
 
       <section className="grid min-h-[100dvh] lg:grid-cols-2">
         <div className="flex flex-col justify-center px-5 py-16 lg:px-10 lg:py-0">
@@ -66,10 +45,10 @@ export function App() {
               Download
             </a>
             <a
-              href="#install"
+              href="/preview"
               className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-sm font-semibold text-white no-underline hover:border-white/40"
             >
-              How to install
+              Open preview
               <ArrowRight size={16} weight="bold" />
             </a>
           </div>
@@ -82,8 +61,6 @@ export function App() {
           />
         </div>
       </section>
-
-      <LivePreview />
 
       <section id="product" className="border-t border-white/10">
         <img
@@ -172,6 +149,9 @@ export function App() {
       <footer className="flex flex-col gap-4 px-5 py-10 text-sm text-white/50 lg:flex-row lg:items-center lg:justify-between lg:px-10">
         <span>MobileResp 0.1.0</span>
         <div className="flex gap-5">
+          <a href="/preview" className="text-white/50 no-underline hover:text-white">
+            Preview
+          </a>
           <a href="#install" className="text-white/50 no-underline hover:text-white">
             Install
           </a>
