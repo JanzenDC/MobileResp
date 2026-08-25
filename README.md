@@ -27,7 +27,9 @@ corepack pnpm zip
 corepack pnpm site
 ```
 
-Opens a local page at `http://localhost:5174` with a **Download for Chrome** button that serves `mobile-resp.zip`.
+Opens a local page at `http://localhost:5174` with a **Download** button that serves `mobile-resp.zip`.
+
+Vercel should build the landing page, not the extension: `pnpm site:build` → `website/dist`.
 
 ## Dev build
 

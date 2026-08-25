@@ -9,7 +9,8 @@
     "build": "tsc --noEmit && vite build",
     "icons": "node scripts/generate-icons.mjs",
     "zip": "tsc --noEmit && vite build && node scripts/pack.mjs",
-    "site": "vite --config website/vite.config.ts"
+    "site": "vite --config website/vite.config.ts",
+    "site:build": "tsc --noEmit && vite build && node scripts/pack.mjs && vite build --config website/vite.config.ts"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",

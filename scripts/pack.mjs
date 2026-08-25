@@ -30,6 +30,8 @@ if (process.platform === 'win32') {
 
 console.log(`Packed ${out}`)
 
-const siteZip = path.join(root, 'website', 'mobile-resp.zip')
+const sitePublic = path.join(root, 'website', 'public')
+mkdirSync(sitePublic, { recursive: true })
+const siteZip = path.join(sitePublic, 'mobile-resp.zip')
 copyFileSync(out, siteZip)
 console.log(`Copied ${siteZip}`)

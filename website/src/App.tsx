@@ -6,7 +6,7 @@ import featureIframe from './assets/feature-iframe.png'
 import heroViewports from './assets/hero-viewports.png'
 import installDesk from './assets/install-desk.png'
 
-const zipHref = './mobile-resp.zip'
+const zipHref = '/mobile-resp.zip'
 
 export function App() {
   const reduce = useReducedMotion()
