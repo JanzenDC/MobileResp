@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-svg-core/styles.css";
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  background: #1a1a1a;
+  color: #d4d4d4;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 12px;
+}

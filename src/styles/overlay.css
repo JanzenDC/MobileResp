@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-svg-core/styles.css";
+
+#mresp-root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 12px;
+  color: #d4d4d4;
+  line-height: 1.25;
+}
+
+.mresp-window {
+  pointer-events: auto;
+  background: #1f1f1f;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.42);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mresp-drag-handle {
+  cursor: move;
+  user-select: none;
+}
+
+.mresp-resize-handle {
+  background: #2a2a2a;
+}
