@@ -20,6 +20,15 @@ That writes `mobile-resp.zip` in the project folder.
 
 Reload the extension there after each new pack.
 
+## Landing page
+
+```bash
+corepack pnpm zip
+corepack pnpm site
+```
+
+Opens a local page at `http://localhost:5174` with a **Download for Chrome** button that serves `mobile-resp.zip`.
+
 ## Dev build
 
 ```bash

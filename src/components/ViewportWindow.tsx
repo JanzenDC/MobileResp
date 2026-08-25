@@ -56,6 +56,7 @@ export function ViewportWindow({ id, pageUrl }: ViewportWindowProps) {
         boxShadow: '0 14px 40px rgba(0,0,0,0.42)',
         overflow: 'hidden',
       }}
+      onMouseDown={(event) => event.stopPropagation()}
       default={{
         x: viewport.x,
         y: viewport.y,
@@ -98,7 +99,7 @@ export function ViewportWindow({ id, pageUrl }: ViewportWindowProps) {
       <ViewportHeader viewport={viewport} />
       <div
         className="relative overflow-hidden bg-[#111]"
-        style={{ width: '100%', flex: 1, minHeight: 0 }}
+        style={{ width: '100%', flex: 1, minHeight: 0, pointerEvents: 'auto' }}
       >
         {!loaded && !failed && (
           <div className="absolute inset-0 z-[1] flex items-center justify-center text-[#8d8d8d]">

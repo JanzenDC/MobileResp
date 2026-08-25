@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, rmSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -29,3 +29,7 @@ if (process.platform === 'win32') {
 }
 
 console.log(`Packed ${out}`)
+
+const siteZip = path.join(root, 'website', 'mobile-resp.zip')
+copyFileSync(out, siteZip)
+console.log(`Copied ${siteZip}`)

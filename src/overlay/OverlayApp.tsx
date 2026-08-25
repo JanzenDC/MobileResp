@@ -18,9 +18,11 @@ export function OverlayApp() {
       id="mresp-overlay"
       style={{
         position: 'fixed',
-        inset: 0,
-        width: '100%',
-        height: '100%',
+        top: 0,
+        left: 0,
+        width: 0,
+        height: 0,
+        overflow: 'visible',
         pointerEvents: 'none',
       }}
     >

@@ -1,4 +1,3 @@
-import { overlayInteracting } from '@/lib/interaction'
 import { OverlayApp } from '@/overlay/OverlayApp'
 import { isRuntimeMessage } from '@/lib/messages'
 import { hydrateStore, listenStorageSync } from '@/store/viewport-store'
@@ -29,20 +28,24 @@ function injectStyles(shadow: ShadowRoot) {
 }
 
 function applyHostStyles(host: HTMLElement) {
-  host.setAttribute('popover', 'manual')
+  if (host.hasAttribute('popover') && typeof host.hidePopover === 'function') {
+    try {
+      if (host.matches(':popover-open')) host.hidePopover()
+    } catch {
+      // ignore
+    }
+    host.removeAttribute('popover')
+  }
+
   const styles: Record<string, string> = {
     position: 'fixed',
     top: '0px',
-    right: '0px',
-    bottom: '0px',
     left: '0px',
+    width: '0px',
+    height: '0px',
     margin: '0px',
     padding: '0px',
     border: '0px',
-    width: '100vw',
-    height: '100vh',
-    maxWidth: 'none',
-    maxHeight: 'none',
     overflow: 'visible',
     background: 'transparent',
     pointerEvents: 'none',
@@ -54,17 +57,9 @@ function applyHostStyles(host: HTMLElement) {
   }
 }
 
-function revealHost(host: HTMLElement) {
-  if (overlayInteracting) return
+function attachHost(host: HTMLElement) {
   if (!host.isConnected || host.parentElement !== document.documentElement) {
     document.documentElement.appendChild(host)
-  }
-  if (typeof host.showPopover === 'function' && !host.matches(':popover-open')) {
-    try {
-      host.showPopover()
-    } catch {
-      // Some pages reject popover; fixed positioning still applies.
-    }
   }
 }
 
@@ -83,26 +78,27 @@ function ensureHost(): { host: HTMLElement; mountPoint: HTMLElement } {
   if (!mountPoint) {
     mountPoint = document.createElement('div')
     mountPoint.id = 'mresp-root'
-    Object.assign(mountPoint.style, {
-      position: 'fixed',
-      inset: '0px',
-      width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-    })
     shadow.appendChild(mountPoint)
   }
+  Object.assign(mountPoint.style, {
+    position: 'fixed',
+    top: '0px',
+    left: '0px',
+    width: '0px',
+    height: '0px',
+    overflow: 'visible',
+    pointerEvents: 'none',
+  })
 
-  revealHost(host)
+  attachHost(host)
   return { host, mountPoint }
 }
 
 function watchHost(host: HTMLElement) {
   if (attaching) return
   attaching = true
-  const observer = new MutationObserver(() => revealHost(host))
+  const observer = new MutationObserver(() => attachHost(host))
   observer.observe(document.documentElement, { childList: true })
-  document.addEventListener('visibilitychange', () => revealHost(host))
 }
 
 async function mount() {
