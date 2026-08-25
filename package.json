@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "vite --config vite.config.extension.ts",
-    "build": "vite build",
+    "build": "vite build && node scripts/publish-site.mjs",
     "build:ext": "tsc --noEmit && vite build --config vite.config.extension.ts",
     "icons": "node scripts/generate-icons.mjs",
     "zip": "tsc --noEmit && vite build --config vite.config.extension.ts && node scripts/pack.mjs",
